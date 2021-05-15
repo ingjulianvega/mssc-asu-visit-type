@@ -28,9 +28,9 @@ server:
   servlet:
     context-path: /asu/v1/visit-type
 #Logging
-#logging:
-#  level:
-#    root: DEBUG
+logging:
+  level:
+    root: DEBUG
 #Exceptions
 visit-type:
   success: The operation was successful.
