@@ -21,8 +21,8 @@ public class VisitTypeController implements VisitTypeI {
     private final VisitTypeService visitTypeService;
 
     @Override
-    public ResponseEntity<VisitTypeList> get() {
-        return new ResponseEntity<>(visitTypeService.get(), HttpStatus.OK);
+    public ResponseEntity<VisitTypeList> get(Boolean usingCache) {
+        return new ResponseEntity<>(visitTypeService.get(usingCache), HttpStatus.OK);
     }
 
     @Override

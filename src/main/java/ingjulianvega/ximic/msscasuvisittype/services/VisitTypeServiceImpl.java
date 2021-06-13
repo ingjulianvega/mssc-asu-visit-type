@@ -24,9 +24,9 @@ public class VisitTypeServiceImpl implements VisitTypeService {
     private final VisitTypeMapper visitTypeMapper;
 
 
-    @Cacheable(cacheNames = "visitTypeListCache")
+    @Cacheable(cacheNames = "visitTypeListCache", condition = "#usingCache == false")
     @Override
-    public VisitTypeList get() {
+    public VisitTypeList get(Boolean usingCache) {
         log.debug("get()...");
         return VisitTypeList
                 .builder()

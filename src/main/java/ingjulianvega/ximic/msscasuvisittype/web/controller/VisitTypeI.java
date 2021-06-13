@@ -33,7 +33,7 @@ public interface VisitTypeI {
     @RequestMapping(value = "/",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<VisitTypeList> get();
+    ResponseEntity<VisitTypeList> get(@Parameter(in = ParameterIn.QUERY, description = "The using of cache", required = true, schema = @Schema()) Boolean usingCache);
 
     @Operation(summary = "Endpoint to get the information of a visit type given the id", description = "Returns a visit type", tags = {"visit type"})
     @ApiResponses(value = {

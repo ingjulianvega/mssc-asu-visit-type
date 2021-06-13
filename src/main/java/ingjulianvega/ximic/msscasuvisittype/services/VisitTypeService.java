@@ -8,7 +8,7 @@ import ingjulianvega.ximic.msscasuvisittype.web.model.VisitTypeList;
 import java.util.UUID;
 
 public interface VisitTypeService {
-    VisitTypeList get();
+    VisitTypeList get(Boolean usingCache);
 
     VisitTypeDto getById(UUID id);
 
