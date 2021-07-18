@@ -11,6 +11,7 @@ import ingjulianvega.ximic.msscasuvisittype.web.model.VisitTypeList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -40,7 +41,14 @@ public class VisitTypeServiceImpl implements VisitTypeService {
         log.debug("getById()...");
         return visitTypeMapper.visitTypeEntityToVisitTypeDto(
                 visitTypeRepository.findById(id)
-                        .orElseThrow(() -> new VisitTypeException(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND, "")));
+                        .orElseThrow(() -> VisitTypeException
+                                .builder()
+                                .httpStatus(HttpStatus.BAD_REQUEST)
+                                .apiCode(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND_API_CODE)
+                                .error(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND_ERROR)
+                                .message(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND_MESSAGE)
+                                .solution(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND_SOLUTION)
+                                .build()));
     }
 
     @Override
@@ -59,7 +67,14 @@ public class VisitTypeServiceImpl implements VisitTypeService {
     public void updateById(UUID id, VisitType visitType) {
         log.debug("updateById...");
         VisitTypeEntity visitEntity = visitTypeRepository.findById(id)
-                .orElseThrow(() -> new VisitTypeException(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND, ""));
+                .orElseThrow(() -> VisitTypeException
+                        .builder()
+                        .httpStatus(HttpStatus.BAD_REQUEST)
+                        .apiCode(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND_API_CODE)
+                        .error(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND_ERROR)
+                        .message(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND_MESSAGE)
+                        .solution(ErrorCodeMessages.VISIT_TYPE_NOT_FOUND_SOLUTION)
+                        .build());
 
         visitEntity.setName(visitType.getName());
         visitTypeRepository.save(visitEntity);
